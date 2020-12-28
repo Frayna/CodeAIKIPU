@@ -1,3 +1,13 @@
+const load = (address) =>{
+	$.ajax(address, {
+	type: 'Get',
+	dataType: "script",
+	async: false,
+	cache: true
+  });
+}
+
+
 var xhr = new XMLHttpRequest();
 
 const refreshMonsters = () => {return Object.values(parent.entities).filter((v) => {if(v.name == enemy)return(true); return false})}
@@ -8,16 +18,7 @@ const sortByDistance = (entitie1, entitie2, entitie3) => {return(
 
 )}
 
-const load = (address) =>{
-	$.ajax(address, {
-    type: 'Get',
-    dataType: "script",
-    async: false,
-    cache: true
-  });
-}
 
-load('http://localhost:4200/test.js');
 
 /*var test = $.ajax('https://cdn.jsdelivr.net/gh/marcopoloq/AdventureLandPublic/testfile.js', {
     type: 'Get',
@@ -40,7 +41,7 @@ setInterval(() => {
             for (let m in parent.party)
                 party_members += 1
             if (party_members == 0)
-                send_cm("Fraynarrior", "group")
+                send_cm(leader_name, "group")
         }, 10000)
 
 on_party_invite = (name) => {
