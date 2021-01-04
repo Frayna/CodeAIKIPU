@@ -1,28 +1,33 @@
-const load = (address) =>{
+const load = (address) => {
 	$.ajax(address, {
+		type: 'Get',
+		dataType: "script",
+		async: false,
+		cache: true
+	});
+}
+
+load(`http://${host}:${porc}/partycall.js`)
+
+
+var xhr = new XMLHttpRequest();
+
+const refreshMonsters = () => { return Object.values(parent.entities).filter((v) => { if (v.name == enemy) return (true); return false }) }
+const vecFromCoord = (vec1, vec2) => { return { x: vec2.x - vec1.x, y: vec2.y - vec1.y } }
+const vecLen = (vec) => { return Math.abs(Math.sqrt(Math.pow(vec.x, 2) + Math.pow(vec.y, 2))) }
+const sortByDistance = (entitie1, entitie2, entitie3) => {
+	return (
+		vecLen(vecFromCoord(entitie1, entitie2))
+
+	)
+}
+
+
+/*var test = $.ajax('https://cdn.jsdelivr.net/gh/marcopoloq/AdventureLandPublic/testfile.js', {
 	type: 'Get',
 	dataType: "script",
 	async: false,
 	cache: true
-  });
-}
-
-var xhr = new XMLHttpRequest();
-
-const refreshMonsters = () => {return Object.values(parent.entities).filter((v) => {if(v.name == enemy)return(true); return false})}
-const vecFromCoord = (vec1, vec2) => {return{x:vec2.x-vec1.x,y:vec2.y-vec1.y}}
-const vecLen = (vec) => {return Math.abs(Math.sqrt(Math.pow(vec.x,2) + Math.pow(vec.y,2)))}
-const sortByDistance = (entitie1, entitie2, entitie3) => {return(
-	vecLen(vecFromCoord(entitie1,entitie2))
-
-)}
-
-
-/*var test = $.ajax('https://cdn.jsdelivr.net/gh/marcopoloq/AdventureLandPublic/testfile.js', {
-    type: 'Get',
-    dataType: "script",
-    async: false,
-    cache: true
   });
 */
 //console.log(path.toNamespacedPath("./"))
@@ -34,24 +39,14 @@ const sortByDistance = (entitie1, entitie2, entitie3) => {return(
 
 //parent.$("#toprightcorner").css("width:5%;")
 
-setInterval(() => {
-            let party_members = 0
-            for (let m in parent.party)
-                party_members += 1
-            if (party_members == 0)
-                send_cm(leader_name, "group")
-        }, 10000)
 
-on_party_invite = (name) => {
-        accept_party_invite(name)
-}
 
 let monsters = refreshMonsters();
-if(monsters)
-monsters.sort((a,b) => {
-	return(vecLen(vecFromCoord(a,{x : parent.character.real_x,y : parent.character.real_y})) -
-	vecLen(vecFromCoord(b,{x : parent.character.real_x,y : parent.character.real_y})))
-})
+if (monsters)
+	monsters.sort((a, b) => {
+		return (vecLen(vecFromCoord(a, { x: parent.character.real_x, y: parent.character.real_y })) -
+			vecLen(vecFromCoord(b, { x: parent.character.real_x, y: parent.character.real_y })))
+	})
 
 
 /*
@@ -93,24 +88,24 @@ setInterval(function(){
 */
 
 setInterval(() => {
-		monsters = refreshMonsters();
-	monsters.sort((a,b) => {
-		return(vecLen(vecFromCoord(a,{x : parent.character.real_x,y : parent.character.real_y})) -
-		vecLen(vecFromCoord(b,{x : parent.character.real_x,y : parent.character.real_y})))
+	monsters = refreshMonsters();
+	monsters.sort((a, b) => {
+		return (vecLen(vecFromCoord(a, { x: parent.character.real_x, y: parent.character.real_y })) -
+			vecLen(vecFromCoord(b, { x: parent.character.real_x, y: parent.character.real_y })))
 	})
-//	console.log(parent.entities[monsters[monster_i]])
-	if(monsters[0]) {
-		if(!is_in_range(monsters[0], "attack"))
-			move(monsters[0].real_x,monsters[0].real_y);
-		else if(is_moving(parent.character))
-			move(parent.character.real_x,parent.character.real_y);
-		if(!is_on_cooldown("attack") && is_in_range(monsters[0], "attack")){
+	//	console.log(parent.entities[monsters[monster_i]])
+	if (monsters[0]) {
+		if (!is_in_range(monsters[0], "attack"))
+			move(monsters[0].real_x, monsters[0].real_y);
+		else if (is_moving(parent.character))
+			move(parent.character.real_x, parent.character.real_y);
+		if (!is_on_cooldown("attack") && is_in_range(monsters[0], "attack")) {
 			attack(monsters[0]).then(
-				function(data){
+				function (data) {
 					damage += data.damage
 				},
-				function(data){
-					game_log("oh no, attack failed: "+data.reason);
+				function (data) {
+					game_log("oh no, attack failed: " + data.reason);
 				},
 			);
 		}
@@ -120,7 +115,7 @@ setInterval(() => {
 		use_skill("use_hp");
 	if (!is_on_cooldown("use_mp") && parent.character.mp < parent.character.max_mp - 300)
 		use_skill("use_mp");
-//	console.log(monsters[monster_i])
+	//	console.log(monsters[monster_i])
 }, 200)
 
 /*
@@ -128,11 +123,11 @@ on_draw = () => {
 	clear_drawings()
 		draw_circle(parent.character.real_x, parent.character.real_y, parent.character.range + 20, 1, 0xAAAAFF)
 	if(monsters[0])
-		draw_circle(parent.character.real_x, parent.character.real_y, 5, 1, 0x00FF00)	
+		draw_circle(parent.character.real_x, parent.character.real_y, 5, 1, 0x00FF00)
 	if(monsters[0]){
 		let vec1 = {x:parent.character.real_x,y:parent.character.real_y};
 		let vec2 = {x:monsters[0].real_x,y:monsters[0].real_y};
-		draw_circle(monsters[0].real_x, monsters[0].real_y, monsters[0].range, 1, 0xFF0000)	
+		draw_circle(monsters[0].real_x, monsters[0].real_y, monsters[0].range, 1, 0xFF0000)
 		let vecFC = vecFromCoord(vec1,vec2)
 		let vecFCLen = vecLen(vecFC)
 		let vecFCNorm = {x : vecFC.x/vecFCLen, y : vecFC.y/vecFCLen}

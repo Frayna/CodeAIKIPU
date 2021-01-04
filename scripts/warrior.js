@@ -1,7 +1,15 @@
-var xhr = new XMLHttpRequest();
+const load = (address) => {
+	$.ajax(address, {
+		type: 'Get',
+		dataType: "script",
+		async: false,
+		cache: true
+	});
+}
 
-// xhr.send(new Int8Array()); 
-// xhr.send(document);
+load(`http://${host}:${porc}/partycall.js`)
+
+// NOTE ZOOM
 
 // (function () {    
 //     if (typeof require !== 'undefined') {
@@ -48,12 +56,6 @@ const sortByDistance = (entitie1, entitie2, entitie3) => {
 		vecLen(vecFromCoord(entitie1, entitie2))
 
 	)
-}
-
-on_cm = (name, data) => {
-	if (data == "group") {
-		send_party_invite(name, false)
-	}
 }
 
 let monsters = refreshMonsters();

@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 const app = express()
-const port = 4200
+const port = 6969
 
 app.use('/', express.static('../scripts/'))
 
