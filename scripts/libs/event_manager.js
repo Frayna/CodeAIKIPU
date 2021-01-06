@@ -1,15 +1,16 @@
-const merchant_in_party = () => {
-	return Object.values(parent.party).filter(e => e.type == "merchant").length
-}
-
-//Repeting custom Event
+//Repeting long custom Event
 setInterval(() => {
 	///////////////Party Checks//////////////
 	//Check party + check party merchant
-	if (!merchant_in_party && Object.values(parent.party).length)
+	if (!merchant_in_party())
 		if (on_party_without_merchant)
 			on_party_without_merchant();
+}, 500)
 
+
+
+//Repeting fast custom Event
+setInterval(() => {
 	//Check for solo
 	if (!Object.values(parent.party).length)
 		if (on_solo) //Not Han Solo you dick head
@@ -42,7 +43,6 @@ setInterval(() => {
 	
 	if (sortByDistance({x:pos_cm.x, y : pos_cm.y}, {x : character.real_x, y : character.real_y}) <= 50 && !on_leader_in_range_previous_state) {
 		//FIRE
-		console.log("TEST");
 		if (on_leader_in_range)
 			on_leader_in_range();
 		on_leader_in_range_previous_state = sortByDistance({x:pos_cm.x, y : pos_cm.y}, {x : character.real_x, y : character.real_y}) <= 50 ? true : false;
@@ -54,9 +54,29 @@ setInterval(() => {
 		on_clean_inventory_previous_state = available_slots() <= threshold.call_for_inventory ? true : false;
 	}
 
-	if (character.gold >= threshold.call_for_gold && !on_clean_gold_previous_state) {
-		if (on_clean_gold);
-			on_clean_gold();
-		on_clean_gold_previous_state = character.gold >= threshold.call_for_gold ? true : false;
+	if (character.ctype != "merchant") {
+		if (character.gold >= threshold.call_for_gold && !on_clean_gold_previous_state) {
+			if (on_clean_gold);
+				on_clean_gold();
+			on_clean_gold_previous_state = character.gold >= threshold.call_for_gold ? true : false;
+		}
+	}
+
+	if(character.ctype != "merchant") {
+		if(on_low_hpot0)
+			if(!on_low_hpot0_previous_state && (locate_item("hpot0") == -1 || character.items[locate_item("hpot0")].q <= threshold.alert_hpot_fighter)) {
+				console.log("testhpot")
+				on_low_hpot0()
+				on_low_hpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("hpot0")].q <= threshold.alert_hpot_fighter) ? true : false;
+			}
+	}
+
+	if(character.ctype != "merchant") {
+		if(on_low_mpot0)
+		if(!on_low_mpot0_previous_state && (locate_item("mpot0") == -1 || character.items[locate_item("mpot0")].q <= threshold.alert_mpot_fighter)) {
+				console.log("testmpot")
+				on_low_mpot0()
+				on_low_mpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("mpot0")].q <= threshold.alert_mpot_fighter) ? true : false;
+			}
 	}
 }, 100);

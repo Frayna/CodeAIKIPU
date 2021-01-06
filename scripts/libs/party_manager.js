@@ -9,3 +9,7 @@ on_party_invite = (leader_name) => {
 	if (auto_party)
 		accept_party_invite(leader_name);
 }
+
+const merchant_in_party = () => {
+	return Object.values(parent.party).filter(e => e.type == "merchant").length
+}

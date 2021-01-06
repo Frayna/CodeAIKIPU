@@ -14,8 +14,13 @@ if (character.owner == "6078116965908480" ) {
 
 let threshold ={
 call_for_inventory: 10,
-call_for_gold: 100000}
-//event constantes
+call_for_gold: 100000,
+max_hpot0_fighter: 3000,
+alert_hpot_fighter: 200,
+max_mpot0_fighter: 3000,
+alert_mpot_fighter: 200
+}
+//event constants
 let on_party_without_merchant;
 let on_solo;
 let on_need_mpot0;
@@ -28,3 +33,7 @@ let on_clean_inventory;
 let on_clean_gold;
 let on_clean_inventory_previous_state;
 let on_clean_gold_previous_state;
+let on_low_hpot0;
+let on_low_hpot0_previous_state;
+let on_low_mpot0;
+let on_low_mpot0_previous_state;;
