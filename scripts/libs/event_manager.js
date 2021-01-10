@@ -18,22 +18,22 @@ setInterval(() => {
 
 	//////////////Potions Checks//////////////
 	//Check for mpot1 needed
-	if (parent.character.mp < parent.character.max_mp - 500 && parent.character.max_mp - 500 > 100)
+	if (parent.character.mp < parent.character.max_mp - 500 && parent.character.max_mp - 500 > 0)
 		if (on_need_mpot1)
 			on_need_mpot1();
 
 	//Check for mpot0 needed
-	if (parent.character.mp < parent.character.max_mp - 300 && parent.character.max_mp - 300 > 100)
+	if (parent.character.mp < parent.character.max_mp - 300 && parent.character.max_mp - 300 > 0)
 		if (on_need_mpot0)
 			on_need_mpot0();
 
 	//Check for hpot1 needed
-	if (parent.character.hp < parent.character.max_hp - 400 && parent.character.max_hp - 400 > 100)
+	if (parent.character.hp < parent.character.max_hp - 400 && parent.character.max_hp - 400 > 0)
 		if (on_need_hpot1)
 			on_need_hpot1();
 
 	//Check for hpot0 needed
-	if (parent.character.hp < parent.character.max_hp - 200 && parent.character.max_hp - 200 > 100)
+	if (parent.character.hp < parent.character.max_hp - 200 && parent.character.max_hp - 200 > 0)
 		if (on_need_hpot0)
 			on_need_hpot0();
 

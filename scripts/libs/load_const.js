@@ -10,6 +10,9 @@ if (character.owner == "5569783890706432" ) {
 }
 if (character.owner == "6078116965908480" ) {
 	leader_name = "Viarader";
+	figthers.push("Viarrior");
+	figthers.push("Viarrest");
+	figthers.push("Vianger");
 }
 
 let threshold ={
