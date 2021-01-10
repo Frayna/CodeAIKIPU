@@ -51,15 +51,15 @@ setInterval(() => {
 	if (available_slots() <= threshold.call_for_inventory && !on_clean_inventory_previous_state) {
 		if (on_clean_inventory) 
 			on_clean_inventory();
-		on_clean_inventory_previous_state = available_slots() <= threshold.call_for_inventory ? true : false;
-	}
+		}
+	on_clean_inventory_previous_state = available_slots() <= threshold.call_for_inventory ? true : false;
 
 	if (character.ctype != "merchant") {
 		if (character.gold >= threshold.call_for_gold && !on_clean_gold_previous_state) {
 			if (on_clean_gold);
 				on_clean_gold();
-			on_clean_gold_previous_state = character.gold >= threshold.call_for_gold ? true : false;
-		}
+			}
+		on_clean_gold_previous_state = character.gold >= threshold.call_for_gold ? true : false;
 	}
 
 	if(character.ctype != "merchant") {
@@ -67,8 +67,8 @@ setInterval(() => {
 			if(!on_low_hpot0_previous_state && (locate_item("hpot0") == -1 || character.items[locate_item("hpot0")].q <= threshold.alert_hpot_fighter)) {
 				console.log("testhpot")
 				on_low_hpot0()
-				on_low_hpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("hpot0")].q <= threshold.alert_hpot_fighter) ? true : false;
 			}
+		on_low_hpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("hpot0")].q <= threshold.alert_hpot_fighter) ? true : false;
 	}
 
 	if(character.ctype != "merchant") {
@@ -76,7 +76,7 @@ setInterval(() => {
 		if(!on_low_mpot0_previous_state && (locate_item("mpot0") == -1 || character.items[locate_item("mpot0")].q <= threshold.alert_mpot_fighter)) {
 				console.log("testmpot")
 				on_low_mpot0()
-				on_low_mpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("mpot0")].q <= threshold.alert_mpot_fighter) ? true : false;
 			}
+		on_low_mpot0_previous_state = (locate_item("mpot0") == -1 || character.items[locate_item("mpot0")].q <= threshold.alert_mpot_fighter) ? true : false;
 	}
 }, 100);
